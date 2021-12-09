@@ -90,6 +90,7 @@ void (*_cef_get_vlog_level)();
 void (*_cef_image_create)();
 void (*_cef_initialize)();
 void (*_cef_is_cert_status_error)();
+void (*_cef_is_rtl)();
 void (*_cef_is_web_plugin_unstable)();
 void (*_cef_label_button_create)();
 void (*_cef_launch_process)();
@@ -290,6 +291,7 @@ HOOK(cef_get_vlog_level)
 HOOK(cef_image_create)
 HOOK(cef_initialize)
 HOOK(cef_is_cert_status_error)
+HOOK(cef_is_rtl)
 HOOK(cef_is_web_plugin_unstable)
 HOOK(cef_label_button_create)
 HOOK(cef_launch_process)
@@ -504,6 +506,7 @@ void __attribute__((constructor)) init()
 	_cef_image_create = dlsym(handle, "cef_image_create");
 	_cef_initialize = dlsym(handle, "cef_initialize");
 	_cef_is_cert_status_error = dlsym(handle, "cef_is_cert_status_error");
+	_cef_is_rtl = dlsym(handle, "cef_is_rtl");
 	_cef_is_web_plugin_unstable = dlsym(handle, "cef_is_web_plugin_unstable");
 	_cef_label_button_create = dlsym(handle, "cef_label_button_create");
 	_cef_launch_process = dlsym(handle, "cef_launch_process");
