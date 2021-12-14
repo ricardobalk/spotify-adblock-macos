@@ -240,8 +240,20 @@ void (*_cef_xml_reader_create)();
 void (*_cef_zip_directory)();
 void (*_cef_zip_reader_create)();
 
+#ifdef __amd64__
+#define HOOK(f) \
+	void __attribute__((naked)) f() \
+	{ \
+		asm volatile( "jmpq *%0;" \
+			     : \
+			     : "r" (_##f)); \
+	}
+#elif __aarch64__
 #define HOOK(f) \
 	void f() { _##f(); }
+#elif
+#error Unknown architecture
+#endif
 
 HOOK(cef_add_cross_origin_whitelist_entry)
 HOOK(cef_api_hash)
