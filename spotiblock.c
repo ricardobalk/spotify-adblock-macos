@@ -1,13 +1,18 @@
+#define PATH "/Applications/Spotify.app/Contents/Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework.orig"
+#define include_timestamps
+// #define include_debug
+
 #include <dlfcn.h>
 #include <stdio.h>
 #include <string.h>
-
-#define PATH "/Applications/Spotify.app/Contents/Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework.orig"
+#ifdef include_timestamps
+#include <time.h>
+#endif
 
 static const char *blacklist[] = {
-	"https://spclient.wg.spotify.com/ads/",
-	"https://spclient.wg.spotify.com/ad-logic/",
-	"https://spclient.wg.spotify.com/gabo-receiver-service/",
+		"https://spclient.wg.spotify.com/ads/",
+		"https://spclient.wg.spotify.com/ad-logic/",
+		"https://spclient.wg.spotify.com/gabo-receiver-service/",
 };
 
 static const int blacklist_len = sizeof(blacklist) / sizeof(blacklist[0]);
@@ -20,7 +25,8 @@ static inline int is_blacklisted(const char *url)
 	return 0;
 }
 
-typedef struct {
+typedef struct
+{
 	unsigned short *str;
 	size_t len;
 	void *p1;
@@ -28,7 +34,8 @@ typedef struct {
 
 typedef cef_string_utf16_t *cef_string_userfree_utf16_t;
 
-typedef struct {
+typedef struct
+{
 	size_t s1;
 	void *p1;
 	void *p2;
@@ -36,7 +43,8 @@ typedef struct {
 	void *p4;
 } cef_base_ref_counted_t;
 
-typedef struct {
+typedef struct
+{
 	cef_base_ref_counted_t base;
 	void *p1;
 	cef_string_userfree_utf16_t (*get_url)(void *);
@@ -440,17 +448,35 @@ HOOK(cef_uridecode)
 HOOK(cef_uriencode)
 void *cef_urlrequest_create(cef_request_t *request, void *client, void *request_context)
 {
+#ifdef include_timestamps
+	time_t t = time(0);
+	struct tm *tm = localtime(&t);
+	char time_str[64];
+	strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", tm);
+#endif
+
 	cef_string_userfree_utf16_t url_utf16 = request->get_url(request);
 	char url[url_utf16->len + 1];
 	url[url_utf16->len] = '\0';
 	for (int i = 0; i < url_utf16->len; i++)
 		url[i] = *(url_utf16->str + i);
 	_cef_string_userfree_utf16_free(url_utf16);
-	if (is_blacklisted(url)) {
-		printf("[BLOCKED] url_request_create: %s\n", url);
+	if (is_blacklisted(url))
+	{
+#ifdef include_timestamps
+		printf("- [%s] url_request_create: %s\n", time_str, url);
+#else
+		printf("- url_request_create: %s\n", url);
+#endif
 		return 0;
 	}
-	printf("[+] url_request_create: %s\n", url);
+#ifdef include_debug
+#ifdef include_timestamps
+	printf("  [%s] url_request_create: %s\n", time_str, url);
+#else
+	printf("  url_request_create: %s\n", url);
+#endif
+#endif
 	return _cef_urlrequest_create(request, client, request_context);
 }
 HOOK(cef_v8context_get_current_context)
