@@ -46,10 +46,11 @@ void (*_cef_add_cross_origin_whitelist_entry)();
 void (*_cef_api_hash)();
 void (*_cef_base64decode)();
 void (*_cef_base64encode)();
+void (*_cef_basetime_now)();
 void (*_cef_begin_tracing)();
 void (*_cef_binary_value_create)();
-void (*_cef_browser_host_create_browser)();
 void (*_cef_browser_host_create_browser_sync)();
+void (*_cef_browser_host_create_browser)();
 void (*_cef_browser_view_create)();
 void (*_cef_browser_view_get_for_browser)();
 void (*_cef_clear_cross_origin_whitelist)();
@@ -102,8 +103,8 @@ void (*_cef_menu_button_create)();
 void (*_cef_menu_model_create)();
 void (*_cef_now_from_system_trace_time)();
 void (*_cef_panel_create)();
-void (*_cef_parse_json)();
 void (*_cef_parse_json_buffer)();
+void (*_cef_parse_json)();
 void (*_cef_parse_jsonand_return_error)();
 void (*_cef_parse_url)();
 void (*_cef_post_data_create)();
@@ -128,6 +129,7 @@ void (*_cef_run_message_loop)();
 void (*_cef_scroll_view_create)();
 void (*_cef_server_create)();
 void (*_cef_set_crash_key_value)();
+void (*_cef_set_data_directory_for_tests)();
 void (*_cef_set_osmodal_loop)();
 void (*_cef_shared_process_message_builder_create)();
 void (*_cef_shutdown)();
@@ -187,16 +189,19 @@ void (*_cef_string_wide_to_utf16)();
 void (*_cef_string_wide_to_utf8)();
 void (*_cef_task_runner_get_for_current_thread)();
 void (*_cef_task_runner_get_for_thread)();
+void (*_cef_test_server_create_and_start)();
 void (*_cef_textfield_create)();
 void (*_cef_thread_create)();
 void (*_cef_time_delta)();
+void (*_cef_time_from_basetime)();
 void (*_cef_time_from_doublet)();
 void (*_cef_time_from_timet)();
 void (*_cef_time_now)();
+void (*_cef_time_to_basetime)();
 void (*_cef_time_to_doublet)();
 void (*_cef_time_to_timet)();
-void (*_cef_trace_counter)();
 void (*_cef_trace_counter_id)();
+void (*_cef_trace_counter)();
 void (*_cef_trace_event_async_begin)();
 void (*_cef_trace_event_async_end)();
 void (*_cef_trace_event_async_step_into)();
@@ -214,13 +219,12 @@ void (*_cef_translator_test_scoped_library_create)();
 void (*_cef_unregister_internal_web_plugin)();
 void (*_cef_uridecode)();
 void (*_cef_uriencode)();
-void *(*_cef_urlrequest_create)(void *, void *, void *);
 void (*_cef_v8context_get_current_context)();
 void (*_cef_v8context_get_entered_context)();
 void (*_cef_v8context_in_context)();
 void (*_cef_v8stack_trace_get_current)();
-void (*_cef_v8value_create_array)();
 void (*_cef_v8value_create_array_buffer)();
+void (*_cef_v8value_create_array)();
 void (*_cef_v8value_create_bool)();
 void (*_cef_v8value_create_date)();
 void (*_cef_v8value_create_double)();
@@ -240,6 +244,7 @@ void (*_cef_write_json)();
 void (*_cef_xml_reader_create)();
 void (*_cef_zip_directory)();
 void (*_cef_zip_reader_create)();
+void *(*_cef_urlrequest_create)(void *, void *, void *);
 
 #ifdef __amd64__
 #define HOOK(f) \
@@ -260,10 +265,11 @@ HOOK(cef_add_cross_origin_whitelist_entry)
 HOOK(cef_api_hash)
 HOOK(cef_base64decode)
 HOOK(cef_base64encode)
+HOOK(cef_basetime_now)
 HOOK(cef_begin_tracing)
 HOOK(cef_binary_value_create)
-HOOK(cef_browser_host_create_browser)
 HOOK(cef_browser_host_create_browser_sync)
+HOOK(cef_browser_host_create_browser)
 HOOK(cef_browser_view_create)
 HOOK(cef_browser_view_get_for_browser)
 HOOK(cef_clear_cross_origin_whitelist)
@@ -316,8 +322,8 @@ HOOK(cef_menu_button_create)
 HOOK(cef_menu_model_create)
 HOOK(cef_now_from_system_trace_time)
 HOOK(cef_panel_create)
-HOOK(cef_parse_json)
 HOOK(cef_parse_json_buffer)
+HOOK(cef_parse_json)
 HOOK(cef_parse_jsonand_return_error)
 HOOK(cef_parse_url)
 HOOK(cef_post_data_create)
@@ -342,9 +348,10 @@ HOOK(cef_run_message_loop)
 HOOK(cef_scroll_view_create)
 HOOK(cef_server_create)
 HOOK(cef_set_crash_key_value)
+HOOK(cef_set_data_directory_for_tests)
 HOOK(cef_set_osmodal_loop)
-HOOK(cef_shutdown)
 HOOK(cef_shared_process_message_builder_create)
+HOOK(cef_shutdown)
 HOOK(cef_stream_reader_create_for_data)
 HOOK(cef_stream_reader_create_for_file)
 HOOK(cef_stream_reader_create_for_handler)
@@ -401,16 +408,19 @@ HOOK(cef_string_wide_to_utf16)
 HOOK(cef_string_wide_to_utf8)
 HOOK(cef_task_runner_get_for_current_thread)
 HOOK(cef_task_runner_get_for_thread)
+HOOK(cef_test_server_create_and_start)
 HOOK(cef_textfield_create)
 HOOK(cef_thread_create)
 HOOK(cef_time_delta)
+HOOK(cef_time_from_basetime)
 HOOK(cef_time_from_doublet)
 HOOK(cef_time_from_timet)
 HOOK(cef_time_now)
+HOOK(cef_time_to_basetime)
 HOOK(cef_time_to_doublet)
 HOOK(cef_time_to_timet)
-HOOK(cef_trace_counter)
 HOOK(cef_trace_counter_id)
+HOOK(cef_trace_counter)
 HOOK(cef_trace_event_async_begin)
 HOOK(cef_trace_event_async_end)
 HOOK(cef_trace_event_async_step_into)
@@ -447,8 +457,8 @@ HOOK(cef_v8context_get_current_context)
 HOOK(cef_v8context_get_entered_context)
 HOOK(cef_v8context_in_context)
 HOOK(cef_v8stack_trace_get_current)
-HOOK(cef_v8value_create_array)
 HOOK(cef_v8value_create_array_buffer)
+HOOK(cef_v8value_create_array)
 HOOK(cef_v8value_create_bool)
 HOOK(cef_v8value_create_date)
 HOOK(cef_v8value_create_double)
@@ -476,6 +486,7 @@ void __attribute__((constructor)) init()
 	_cef_api_hash = dlsym(handle, "cef_api_hash");
 	_cef_base64decode = dlsym(handle, "cef_base64decode");
 	_cef_base64encode = dlsym(handle, "cef_base64encode");
+	_cef_basetime_now = dlsym(handle, "cef_basetime_now");
 	_cef_begin_tracing = dlsym(handle, "cef_begin_tracing");
 	_cef_binary_value_create = dlsym(handle, "cef_binary_value_create");
 	_cef_browser_host_create_browser = dlsym(handle, "cef_browser_host_create_browser");
@@ -558,9 +569,10 @@ void __attribute__((constructor)) init()
 	_cef_scroll_view_create = dlsym(handle, "cef_scroll_view_create");
 	_cef_server_create = dlsym(handle, "cef_server_create");
 	_cef_set_crash_key_value = dlsym(handle, "cef_set_crash_key_value");
+	_cef_set_data_directory_for_tests = dlsym(handle, "cef_set_data_directory_for_tests");
 	_cef_set_osmodal_loop = dlsym(handle, "cef_set_osmodal_loop");
-	_cef_shutdown = dlsym(handle, "cef_shutdown");
 	_cef_shared_process_message_builder_create = dlsym(handle, "cef_shared_process_message_builder_create");
+	_cef_shutdown = dlsym(handle, "cef_shutdown");
 	_cef_stream_reader_create_for_data = dlsym(handle, "cef_stream_reader_create_for_data");
 	_cef_stream_reader_create_for_file = dlsym(handle, "cef_stream_reader_create_for_file");
 	_cef_stream_reader_create_for_handler = dlsym(handle, "cef_stream_reader_create_for_handler");
@@ -617,12 +629,15 @@ void __attribute__((constructor)) init()
 	_cef_string_wide_to_utf8 = dlsym(handle, "cef_string_wide_to_utf8");
 	_cef_task_runner_get_for_current_thread = dlsym(handle, "cef_task_runner_get_for_current_thread");
 	_cef_task_runner_get_for_thread = dlsym(handle, "cef_task_runner_get_for_thread");
+	_cef_test_server_create_and_start = dlsym(handle, "cef_test_server_create_and_start");
 	_cef_textfield_create = dlsym(handle, "cef_textfield_create");
 	_cef_thread_create = dlsym(handle, "cef_thread_create");
 	_cef_time_delta = dlsym(handle, "cef_time_delta");
+	_cef_time_from_basetime = dlsym(handle, "cef_time_from_basetime");
 	_cef_time_from_doublet = dlsym(handle, "cef_time_from_doublet");
 	_cef_time_from_timet = dlsym(handle, "cef_time_from_timet");
 	_cef_time_now = dlsym(handle, "cef_time_now");
+	_cef_time_to_basetime = dlsym(handle, "cef_time_to_basetime");
 	_cef_time_to_doublet = dlsym(handle, "cef_time_to_doublet");
 	_cef_time_to_timet = dlsym(handle, "cef_time_to_timet");
 	_cef_trace_counter = dlsym(handle, "cef_trace_counter");
