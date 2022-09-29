@@ -46,6 +46,7 @@ void (*_cef_add_cross_origin_whitelist_entry)();
 void (*_cef_api_hash)();
 void (*_cef_base64decode)();
 void (*_cef_base64encode)();
+void (*_cef_basetime_now)();
 void (*_cef_begin_tracing)();
 void (*_cef_binary_value_create)();
 void (*_cef_browser_host_create_browser)();
@@ -128,6 +129,7 @@ void (*_cef_run_message_loop)();
 void (*_cef_scroll_view_create)();
 void (*_cef_server_create)();
 void (*_cef_set_crash_key_value)();
+void (*_cef_set_data_directory_for_tests)();
 void (*_cef_set_osmodal_loop)();
 void (*_cef_shared_process_message_builder_create)();
 void (*_cef_shutdown)();
@@ -187,12 +189,15 @@ void (*_cef_string_wide_to_utf16)();
 void (*_cef_string_wide_to_utf8)();
 void (*_cef_task_runner_get_for_current_thread)();
 void (*_cef_task_runner_get_for_thread)();
+void (*_cef_test_server_create_and_start)();
 void (*_cef_textfield_create)();
 void (*_cef_thread_create)();
 void (*_cef_time_delta)();
+void (*_cef_time_from_basetime)();
 void (*_cef_time_from_doublet)();
 void (*_cef_time_from_timet)();
 void (*_cef_time_now)();
+void (*_cef_time_to_basetime)();
 void (*_cef_time_to_doublet)();
 void (*_cef_time_to_timet)();
 void (*_cef_trace_counter)();
@@ -260,6 +265,7 @@ HOOK(cef_add_cross_origin_whitelist_entry)
 HOOK(cef_api_hash)
 HOOK(cef_base64decode)
 HOOK(cef_base64encode)
+HOOK(cef_basetime_now)
 HOOK(cef_begin_tracing)
 HOOK(cef_binary_value_create)
 HOOK(cef_browser_host_create_browser)
@@ -342,6 +348,7 @@ HOOK(cef_run_message_loop)
 HOOK(cef_scroll_view_create)
 HOOK(cef_server_create)
 HOOK(cef_set_crash_key_value)
+HOOK(cef_set_data_directory_for_tests)
 HOOK(cef_set_osmodal_loop)
 HOOK(cef_shutdown)
 HOOK(cef_shared_process_message_builder_create)
@@ -401,12 +408,15 @@ HOOK(cef_string_wide_to_utf16)
 HOOK(cef_string_wide_to_utf8)
 HOOK(cef_task_runner_get_for_current_thread)
 HOOK(cef_task_runner_get_for_thread)
+HOOK(cef_test_server_create_and_start)
 HOOK(cef_textfield_create)
 HOOK(cef_thread_create)
 HOOK(cef_time_delta)
+HOOK(cef_time_from_basetime)
 HOOK(cef_time_from_doublet)
 HOOK(cef_time_from_timet)
 HOOK(cef_time_now)
+HOOK(cef_time_to_basetime)
 HOOK(cef_time_to_doublet)
 HOOK(cef_time_to_timet)
 HOOK(cef_trace_counter)
@@ -476,6 +486,7 @@ void __attribute__((constructor)) init()
 	_cef_api_hash = dlsym(handle, "cef_api_hash");
 	_cef_base64decode = dlsym(handle, "cef_base64decode");
 	_cef_base64encode = dlsym(handle, "cef_base64encode");
+  _cef_basetime_now = dlsym(handle, "cef_basetime_now");
 	_cef_begin_tracing = dlsym(handle, "cef_begin_tracing");
 	_cef_binary_value_create = dlsym(handle, "cef_binary_value_create");
 	_cef_browser_host_create_browser = dlsym(handle, "cef_browser_host_create_browser");
@@ -558,6 +569,7 @@ void __attribute__((constructor)) init()
 	_cef_scroll_view_create = dlsym(handle, "cef_scroll_view_create");
 	_cef_server_create = dlsym(handle, "cef_server_create");
 	_cef_set_crash_key_value = dlsym(handle, "cef_set_crash_key_value");
+  _cef_set_data_directory_for_tests = dlsym(handle, "cef_set_data_directory_for_tests");
 	_cef_set_osmodal_loop = dlsym(handle, "cef_set_osmodal_loop");
 	_cef_shutdown = dlsym(handle, "cef_shutdown");
 	_cef_shared_process_message_builder_create = dlsym(handle, "cef_shared_process_message_builder_create");
@@ -617,12 +629,15 @@ void __attribute__((constructor)) init()
 	_cef_string_wide_to_utf8 = dlsym(handle, "cef_string_wide_to_utf8");
 	_cef_task_runner_get_for_current_thread = dlsym(handle, "cef_task_runner_get_for_current_thread");
 	_cef_task_runner_get_for_thread = dlsym(handle, "cef_task_runner_get_for_thread");
+  _cef_test_server_create_and_start = dlsym(handle, "cef_test_server_create_and_start");
 	_cef_textfield_create = dlsym(handle, "cef_textfield_create");
 	_cef_thread_create = dlsym(handle, "cef_thread_create");
 	_cef_time_delta = dlsym(handle, "cef_time_delta");
+  _cef_time_from_basetime = dlsym(handle, "cef_time_from_basetime");
 	_cef_time_from_doublet = dlsym(handle, "cef_time_from_doublet");
 	_cef_time_from_timet = dlsym(handle, "cef_time_from_timet");
 	_cef_time_now = dlsym(handle, "cef_time_now");
+  _cef_time_to_basetime = dlsym(handle, "cef_time_to_basetime");
 	_cef_time_to_doublet = dlsym(handle, "cef_time_to_doublet");
 	_cef_time_to_timet = dlsym(handle, "cef_time_to_timet");
 	_cef_trace_counter = dlsym(handle, "cef_trace_counter");
