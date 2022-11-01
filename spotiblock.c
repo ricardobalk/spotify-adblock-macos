@@ -538,8 +538,8 @@ void __attribute__((constructor)) init()
 	_cef_delete_file = dlsym(handle, "cef_delete_file");
 	_cef_dictionary_value_create = dlsym(handle, "cef_dictionary_value_create");
 	_cef_directory_exists = dlsym(handle, "cef_directory_exists");
-  _cef_display_convert_screen_point_from_pixels = dlsym(handle, "cef_display_convert_screen_point_from_pixels");
-  _cef_display_convert_screen_point_to_pixels = dlsym(handle, "cef_display_convert_screen_point_to_pixels");
+	_cef_display_convert_screen_point_from_pixels = dlsym(handle, "cef_display_convert_screen_point_from_pixels");
+	_cef_display_convert_screen_point_to_pixels = dlsym(handle, "cef_display_convert_screen_point_to_pixels");
 	_cef_display_get_alls = dlsym(handle, "cef_display_get_alls");
 	_cef_display_get_count = dlsym(handle, "cef_display_get_count");
 	_cef_display_get_matching_bounds = dlsym(handle, "cef_display_get_matching_bounds");
