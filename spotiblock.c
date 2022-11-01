@@ -76,6 +76,8 @@ void (*_cef_currently_on)();
 void (*_cef_delete_file)();
 void (*_cef_dictionary_value_create)();
 void (*_cef_directory_exists)();
+void (*_cef_display_convert_screen_point_from_pixels)();
+void (*_cef_display_convert_screen_point_to_pixels)();
 void (*_cef_display_get_alls)();
 void (*_cef_display_get_count)();
 void (*_cef_display_get_matching_bounds)();
@@ -295,6 +297,8 @@ HOOK(cef_currently_on)
 HOOK(cef_delete_file)
 HOOK(cef_dictionary_value_create)
 HOOK(cef_directory_exists)
+HOOK(cef_display_convert_screen_point_from_pixels)
+HOOK(cef_display_convert_screen_point_to_pixels)
 HOOK(cef_display_get_alls)
 HOOK(cef_display_get_count)
 HOOK(cef_display_get_matching_bounds)
@@ -534,6 +538,8 @@ void __attribute__((constructor)) init()
 	_cef_delete_file = dlsym(handle, "cef_delete_file");
 	_cef_dictionary_value_create = dlsym(handle, "cef_dictionary_value_create");
 	_cef_directory_exists = dlsym(handle, "cef_directory_exists");
+  _cef_display_convert_screen_point_from_pixels = dlsym(handle, "cef_display_convert_screen_point_from_pixels");
+  _cef_display_convert_screen_point_to_pixels = dlsym(handle, "cef_display_convert_screen_point_to_pixels");
 	_cef_display_get_alls = dlsym(handle, "cef_display_get_alls");
 	_cef_display_get_count = dlsym(handle, "cef_display_get_count");
 	_cef_display_get_matching_bounds = dlsym(handle, "cef_display_get_matching_bounds");
